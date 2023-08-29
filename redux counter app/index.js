@@ -1,14 +1,14 @@
 const Increment = "INCREMENT"
 const IncrementByValue = "INCREMENT_BY_VALUE"
 
-
+const AddUser = "ADD_USER"
 const Decrement = "DECREMENT"
 const Reset = "RESET"
 
 
 const {createStore} = require ("redux")
 
-const initialCountState ={count : 0}
+const initialCountState ={user : ["zaman"], count : 1}
 
 //action (type object) --- type,payload
 
@@ -34,6 +34,13 @@ const incrementBYValue = (value) =>{
     return {
         type: IncrementByValue,
         payload: value
+    }
+}
+
+const fAddUser = (user) =>{
+    return {
+        type: AddUser,
+        payload: user
     }
 }
 // reducer 
@@ -63,7 +70,13 @@ const reducer = (state = initialCountState, action ) =>{
                 return {
                     ...state,
                     count: state.count + action.payload
-                }    
+                }   
+                
+            case AddUser:
+                return {
+                    user: [...state.user, action.payload],
+                    count: state.count + 1
+                } 
         default:
             state;
     }
@@ -92,7 +105,13 @@ store.subscribe(()=>{
 
 // store.dispatch(resetCount())
 
-store.dispatch(incrementBYValue(10))
-store.dispatch(incrementBYValue(30))
+// store.dispatch(incrementBYValue(10))
+// store.dispatch(incrementBYValue(30))
+
+store.dispatch(fAddUser("nur"))
+store.dispatch(fAddUser("moon"))
+store.dispatch(fAddUser("shuvo"))
+
+
 
 
