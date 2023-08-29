@@ -1,4 +1,7 @@
 const Increment = "INCREMENT"
+const IncrementByValue = "INCREMENT_BY_VALUE"
+
+
 const Decrement = "DECREMENT"
 const Reset = "RESET"
 
@@ -26,6 +29,13 @@ const resetCount = () =>{
         type: Reset,
     }
 }
+
+const incrementBYValue = (value) =>{
+    return {
+        type: IncrementByValue,
+        payload: value
+    }
+}
 // reducer 
 
 const reducer = (state = initialCountState, action ) =>{
@@ -48,6 +58,12 @@ const reducer = (state = initialCountState, action ) =>{
                     ...state,
                     count: 0
                 }
+            
+            case IncrementByValue:
+                return {
+                    ...state,
+                    count: state.count + action.payload
+                }    
         default:
             state;
     }
@@ -65,14 +81,18 @@ store.subscribe(()=>{
 
 //dispatch
 
-store.dispatch(inCrementCount())
-store.dispatch(inCrementCount())
-store.dispatch(inCrementCount())
-store.dispatch(inCrementCount())
-store.dispatch(inCrementCount())
+// store.dispatch(inCrementCount())
+// store.dispatch(inCrementCount())
+// store.dispatch(inCrementCount())
+// store.dispatch(inCrementCount())
+// store.dispatch(inCrementCount())
 
-store.dispatch(deCrementCount())
-store.dispatch(deCrementCount())
+// store.dispatch(deCrementCount())
+// store.dispatch(deCrementCount())
 
-store.dispatch(resetCount())
+// store.dispatch(resetCount())
+
+store.dispatch(incrementBYValue(10))
+store.dispatch(incrementBYValue(30))
+
 
